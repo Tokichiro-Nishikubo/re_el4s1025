@@ -5,18 +5,7 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] private MonoBehaviour[] titleObjects;
 
-    private void Start()
-    {
-        CallTitleSet();
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CallGameStart();
-        }
-    }
     public void CallTitleSet()
     {
         foreach (var obj in titleObjects)
@@ -26,11 +15,11 @@ public class TitleManager : MonoBehaviour
         }
     }
 
-    public void CallGameStart()
+    public void CallTitleEnd()
     {
         foreach (var obj in titleObjects)
         {
-            obj.GetComponent<ITitleObject>().GameStart();
+            obj.GetComponent<ITitleObject>().TitleEnd();
         }
     }
 }

@@ -1,23 +1,27 @@
 using UnityEngine;
 using System.Collections;
 
-public class TitleMoverObject : MonoBehaviour, ITitleObject
+public class ResultMoverObject : MonoBehaviour, IResultObject
 {
     [SerializeField] private Vector3 pos;   // 移動先（相対位置）
     [SerializeField] private float duration = 1.0f; // 移動時間（秒）
-
+    private Vector3 targetpos;
     private Coroutine moveCoroutine;
 
-    public void TitleSet()
+    public void Start()
+    {
+        targetpos = transform.position+pos;
+    }
+    public void ResultSet()
     {
         // 現在位置 + pos にイージングで移動
-        MoveTo(transform.position + pos);
+        MoveTo(targetpos);
     }
 
-    public void GameStart()
+    public void ResultEnd()
     {
         // 現在位置 - pos にイージングで移動
-        MoveTo(transform.position - pos);
+        MoveTo(targetpos - pos);
     }
 
     private void MoveTo(Vector3 targetPos)
@@ -54,7 +58,7 @@ public class TitleMoverObject : MonoBehaviour, ITitleObject
     {
         // 現在位置
         Vector3 current = transform.position;
-        // 目標位置（TitleSet 時）
+        // 目標位置（ResultSet 時）
         Vector3 target = current + pos;
 
         Gizmos.color = Color.cyan;
