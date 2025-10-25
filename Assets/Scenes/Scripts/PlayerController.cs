@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Min(0f)] private float _gameOverDownSpeedSec = 5.0f;
     [Header("model")]
     [SerializeField] private GameObject _rotateModelObject;
+    [SerializeField] private ParticleSystem _particle;
 
     private Transform _transCache = null;
     private Vector3 _firstPos = Vector3.zero;
@@ -43,9 +44,10 @@ public class PlayerController : MonoBehaviour
     {
         _transCache = transform;
         _firstPos = _transCache.position;
+        _particle.Stop();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (!IsGame) return;
@@ -55,6 +57,16 @@ public class PlayerController : MonoBehaviour
             GameOverUpdate();
             return;
         }
+
+        if (!_particle.isPlaying && Mathf.Abs(GetRotateAngle()) >= _jumpGameOverRotate)
+        {
+            _particle.Play();
+        }
+        else if(Mathf.Abs(GetRotateAngle()) < _jumpGameOverRotate)
+        {
+            _particle.Stop();
+        }
+
 
         if (!IsJump && Input.GetKey(KeyCode.Space))
         {
