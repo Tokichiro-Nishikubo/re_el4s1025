@@ -124,5 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2244b9ed832867047a5d147d4f293378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 0, z: 1}
+  moveDirection: {x: 0, y: 0, z: -1}
   moveSpeed: 2
+  enableRotation: 0
+  rotationSpeed: 90

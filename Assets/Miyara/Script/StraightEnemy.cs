@@ -27,7 +27,8 @@ public class StraightEnemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("プレイヤーに接触！");
-            // ここにダメージ処理やイベントを追加
+
+            GameManager.Instance.PlayerController.GameOverStart();
         }
     }
 }

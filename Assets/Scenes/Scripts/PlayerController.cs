@@ -14,17 +14,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Min(0f)] private float _tiltMinStrSec = 0.2f;
     [SerializeField, Min(0f)] private float _jumpHeight = 1.0f;
     [SerializeField, Min(0f)] private float _jumpDurationSec = 1.0f;
+    [SerializeField, Min(0f)] private float _jumpGameOverRotate = 24.0f;
+    [SerializeField, Min(0f)] private float _gameoverJumpHeight = 0.01f;
     [SerializeField, Min(0f)] private float _myWeight = 0.2f;
+    [SerializeField, Min(0f)] private float _gameOverDownSpeedSec = 5.0f;
     [Header("model")]
     [SerializeField] private GameObject _rotateModelObject;
 
     private Transform _transCache = null;
     private Vector3 _firstPos = Vector3.zero;
 
-    public bool IsGame { get; set; } = true;
+    public bool IsGame { get; set; } = false;
 
     public bool IsJump { get; private set; } = false;
+    public bool GameOverJump { get; private set; } = false;
+
     private float _jumpTimer = 0f;
+    private float _gameOverLimitTimer = 0f;
+
+    public bool GameOver { get; private set; } = false;
 
     public float CurShakingSpeed { get; set; }
 
@@ -42,13 +50,29 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsGame) return;
 
+        if(GameOver)
+        {
+            GameOverUpdate();
+            return;
+        }
+
         if (!IsJump && Input.GetKey(KeyCode.Space))
         {
             _jumpTimer = 0f;
+
+            if(Mathf.Abs(GetRotateAngle()) >= _jumpGameOverRotate)
+            {
+                GameOverJump = true;
+            }
             IsJump = true;
         }
 
-        if(IsJump)
+        if(GameOverJump)
+        {
+            GameOverJumpUpdate();
+            return;
+        }
+        else if(IsJump)
         {
             JumpUpdate();
             return;
@@ -88,7 +112,6 @@ public class PlayerController : MonoBehaviour
         }
 
         float t = ((_jumpDurationSec * 0.5f) - Mathf.Abs(_jumpDurationSec * 0.5f - _jumpTimer)) / _jumpDurationSec * 0.5f;
-        Debug.Log(t);
         float height = EaseLib.EaseOutQuart(t) * _jumpHeight;
 
         Vector3 pos = _transCache.position;
@@ -117,6 +140,20 @@ public class PlayerController : MonoBehaviour
         // 現在の傾きの力をshakeに加える
         float zAngle = Vector3.SignedAngle(Vector3.up, _rotateModelObject.transform.up, Vector3.forward);
         CurShakingSpeed += Mathf.Abs(zAngle) * Time.deltaTime * _myWeight * GetSign(zAngle);
+
+        // 端過ぎたらタイマー開始  一定時間以上でゲームオーバー
+        if(Mathf.Abs(zAngle) >= _gameOverRotateValue)
+        {
+            _gameOverLimitTimer += Time.deltaTime;
+            if(_gameOverLimitTimer >= _endureGameOverRotateDurationSec)
+            {
+                GameOverStart();
+            }
+        }
+        else
+        {
+            _gameOverLimitTimer = 0f;
+        }
 
         // 振動を制限
         CurShakingSpeed = Mathf.Clamp(CurShakingSpeed, -_limitShake, _limitShake);
@@ -149,5 +186,40 @@ public class PlayerController : MonoBehaviour
     {
         int rnd = UnityEngine.Random.Range(0, 2);
         return rnd == 0 ? 1.0f : -1.0f;
+    }
+
+    private void GameOverJumpUpdate()
+    {
+        _jumpTimer += Time.deltaTime;
+        float t = _jumpTimer / _jumpDurationSec;
+        float height = EaseLib.EaseOutQuart(t) * _gameoverJumpHeight;
+
+        Vector3 pos = _rotateModelObject.transform.localPosition;
+        pos = _rotateModelObject.transform.up * height;
+
+        _rotateModelObject.transform.localPosition = pos;
+
+        // 経過時間が半分を超えたら自身も落ちる
+        if(t>= 0.5f)
+        {
+            GameOverStart();
+        }
+    }
+
+    private void GameOverUpdate()
+    {
+        float down = Time.deltaTime * _gameOverDownSpeedSec;
+
+        Vector3 pos = _transCache.position;
+        pos.y -= down;
+
+        _transCache.position = pos;
+    }
+
+    public void GameOverStart()
+    {
+        if (GameOver) return;
+        GameOver = true;
+        GameManager.Instance.GameOver();
     }
 }
