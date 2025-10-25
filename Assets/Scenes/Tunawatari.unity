@@ -2750,7 +2750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: minSpeed
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: moveDirection.z
