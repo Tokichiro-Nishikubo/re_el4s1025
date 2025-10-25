@@ -76,8 +76,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         BGMManager.Instance.FadeOut(0.3f, () =>
         {
-            BGMManager.Instance.Play(BGMPath.GOAL);
-            BGMManager.Instance.FadeIn(0.6f);
+            SceneManager.LoadScene("GoalScene");
         });
     }
 }
