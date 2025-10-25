@@ -2746,11 +2746,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: maxSpeed
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: minSpeed
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: moveDirection.z
