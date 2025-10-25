@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6246798839603896726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7208443141755246735}
+  - component: {fileID: 6086761565909712596}
+  m_Layer: 0
+  m_Name: CrowSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7208443141755246735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6246798839603896726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.149295, y: 0.8943735, z: 0.20596622}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6086761565909712596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6246798839603896726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9687b8cdead5115428f0af9a590cb7c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 1}
+  moveSpeed: 2
+  spawnLanes:
+  - {fileID: 462310483876660816, guid: 0a655b6c44ca02e4b86634212c7eb358, type: 3}
+  - {fileID: 7737891885486695199, guid: e7e509d61bee6a24c9d024afd85b87c3, type: 3}
+  - {fileID: 7450665030378756863, guid: 9c20a3e3b04832046891e116862d546e, type: 3}
+  laneSettings:
+  - laneIndex: 0
+    mode: 0
+  - laneIndex: 1
+    mode: 0
+  - laneIndex: 2
+    mode: 0
+  - laneIndex: 2
+    mode: 0
+  - laneIndex: 0
+    mode: 0
+  - laneIndex: 1
+    mode: 0
+  - laneIndex: 2
+    mode: 1
+  - laneIndex: 1
+    mode: 1
+  - laneIndex: 0
+    mode: 1
+  - laneIndex: 2
+    mode: 1
+  enemyPrefab: {fileID: 474151869896865932, guid: e3d2e0ff70573004799e3274ef296f49, type: 3}
