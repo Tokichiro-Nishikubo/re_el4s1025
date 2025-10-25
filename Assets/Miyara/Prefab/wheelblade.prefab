@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8109726653662472209}
   - component: {fileID: -1771267429906856527}
   - component: {fileID: -2832966889076806653}
-  - component: {fileID: 5062078034980225551}
+  - component: {fileID: 6628107870189400048}
   m_Layer: 0
   m_Name: wheelblade
   m_TagString: WheelBlade
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 1}
-  moveSpeed: 2
+  moveSpeed: 3
   enableRotation: 1
   rotationSpeed: 90
 --- !u!54 &-2832966889076806653
@@ -82,8 +82,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!135 &5062078034980225551
-SphereCollider:
+--- !u!65 &6628107870189400048
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,11 +97,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.6
+  m_Size: {x: 1, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5475813004758343199
 PrefabInstance:
