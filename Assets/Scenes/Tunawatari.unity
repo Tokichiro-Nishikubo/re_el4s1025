@@ -2406,7 +2406,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 462310483876660816, guid: 0a655b6c44ca02e4b86634212c7eb358, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 462310483876660816, guid: 0a655b6c44ca02e4b86634212c7eb358, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2745,6 +2745,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
+      propertyPath: maxSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
+      propertyPath: minSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: moveDirection.z
       value: -1
       objectReference: {fileID: 0}
@@ -2760,6 +2768,10 @@ PrefabInstance:
       propertyPath: 'spawnLanes.Array.data[2]'
       value: 
       objectReference: {fileID: 27579778}
+    - target: {fileID: 6086761565909712596, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
+      propertyPath: laneSettings.Array.data[1].mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6246798839603896726, guid: 5f6b3185c4bac9a4288c3f15438742da, type: 3}
       propertyPath: m_Name
       value: CrowSpawn
