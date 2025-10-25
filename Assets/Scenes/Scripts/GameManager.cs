@@ -1,3 +1,4 @@
+using KanKikuchi.AudioManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         FadeManager.Instance.FadeSet(1f);
         FadeManager.Instance.FadeOut(1f);
+
+        BGMManager.Instance.Play(BGMPath.BGM);
+        BGMManager.Instance.FadeIn(0.5f);
     }
 
     public void StartGame()
@@ -33,6 +37,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void GameOver()
     {
+        BGMManager.Instance.FadeOut(1.0f);
         FadeManager.Instance.FadeIn(2f, () =>
         {
             // GameOverシーンを呼ぶ
@@ -69,6 +74,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void Clear()
     {
-
+        BGMManager.Instance.FadeOut(0.3f, () =>
+        {
+            BGMManager.Instance.Play(BGMPath.GOAL);
+            BGMManager.Instance.FadeIn(0.6f);
+        });
     }
 }
