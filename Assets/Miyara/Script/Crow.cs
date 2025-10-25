@@ -12,7 +12,8 @@ public class Crow : MonoBehaviour
 
     [Header("移動設定")]
     [SerializeField] public Vector3 moveDirection = Vector3.forward;
-    [SerializeField] public float moveSpeed = 2.0f;
+    [SerializeField] public float minSpeed = 1.0f;
+    [SerializeField] public float maxSpeed = 5.0f;
 
     [Header("レーン設定")]
     [SerializeField] public Transform[] spawnLanes;
@@ -55,20 +56,27 @@ public class Crow : MonoBehaviour
     /// <summary>
     /// 指定レーンに敵をスポーン
     /// </summary>
-    private void SpawnCrowOneLane(float offsetDistance, int lane)
+private void SpawnCrowOneLane(float offsetDistance, int lane)
+{
+    if (lane < 0 || lane >= spawnLanes.Length)
     {
-        if (lane < 0 || lane >= spawnLanes.Length)
-        {
-            Debug.LogWarning($"laneIndex の値 {lane} が spawnLanes の範囲外です");
-            return;
-        }
-
-        Vector3 basePos = spawnLanes[lane].position;
-        Vector3 spawnPos = basePos + moveDirection.normalized * offsetDistance;
-
-        GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-
+        Debug.LogWarning($"laneIndex の値 {lane} が spawnLanes の範囲外です");
+        return;
     }
+
+    Vector3 basePos = spawnLanes[lane].position;
+    Vector3 spawnPos = basePos + moveDirection.normalized * offsetDistance;
+
+    GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+    // 個別速度を設定（例：ランダム）
+    float speed = Random.Range(minSpeed, maxSpeed);
+    var mover = enemy.GetComponent<StraightEnemy>();
+    if (mover != null)
+    {
+        mover.moveSpeed = speed;
+    }
+}
 
     /// <summary>
     /// 指定レーン以外の2レーンに敵をスポーン
@@ -90,6 +98,14 @@ public class Crow : MonoBehaviour
             Vector3 spawnPos = basePos + moveDirection.normalized * offsetDistance;
 
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+            // 個別速度を設定（例：ランダム）
+            float speed = Random.Range(minSpeed, maxSpeed);
+            var mover = enemy.GetComponent<StraightEnemy>();
+            if (mover != null)
+            {
+                mover.moveSpeed = speed;
+            }
 
             spawned++;
             if (spawned >= 2) break;
