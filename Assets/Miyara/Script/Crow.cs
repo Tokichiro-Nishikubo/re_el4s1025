@@ -26,6 +26,9 @@ public class Crow : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] float range = 5.0f;
 
+    [Header("スポーン制御")]
+    [SerializeField] private bool useRandomLane = true;
+    [SerializeField] private bool useRandomMode = true;
 
     private int spawnCount = 0; // Spawn関数の呼び出し回数
 
@@ -36,30 +39,52 @@ public class Crow : MonoBehaviour
     /// </summary>
     public void SpawnCrow(float offsetDistance)
     {
-        if (laneSettings.Length == 0 || spawnLanes.Length == 0)
+        if (spawnLanes.Length < 3)
         {
-            Debug.LogWarning("laneSettings または spawnLanes が未設定です");
+            Debug.LogWarning("spawnLanes が3つ未満です");
             return;
         }
 
-        int index = spawnCount % laneSettings.Length;
-        LaneSpawnSetting setting = laneSettings[index];
+        int laneIndex;
+        bool mode = false;
 
-
-        // プレイヤーとの距離判定によるスポーン停止
-        float distance = Vector3.Distance(player.transform.position, spawnLanes[index].position);
-        if (distance < range)
-            return;
-
-
-
-        if (setting.mode)
+        if (useRandomLane)
         {
-            SpawnCrowOtherLanes(offsetDistance, setting.laneIndex);
+            laneIndex = Random.Range(0, spawnLanes.Length);
         }
         else
         {
-            SpawnCrowOneLane(offsetDistance, setting.laneIndex);
+            if (laneSettings.Length == 0)
+            {
+                Debug.LogWarning("laneSettings が未設定です");
+                return;
+            }
+
+            int index = spawnCount % laneSettings.Length;
+            laneIndex = laneSettings[index].laneIndex;
+            mode = useRandomMode ? Random.value < 0.5f : laneSettings[index].mode;
+        }
+
+        if (useRandomLane && useRandomMode)
+        {
+            mode = Random.value < 0.5f;
+        }
+
+        // プレイヤーとの距離チェック
+        float distance = Vector3.Distance(player.transform.position, spawnLanes[laneIndex].position);
+        if (distance < range)
+        {
+            Debug.Log($"レーン{laneIndex}はプレイヤーに近すぎるためスキップ");
+            return;
+        }
+
+        if (mode)
+        {
+            SpawnCrowOtherLanes(offsetDistance, laneIndex);
+        }
+        else
+        {
+            SpawnCrowOneLane(offsetDistance, laneIndex);
         }
 
         spawnCount++;
@@ -68,7 +93,7 @@ public class Crow : MonoBehaviour
     /// <summary>
     /// 指定レーンに敵をスポーン
     /// </summary>
-private void SpawnCrowOneLane(float offsetDistance, int lane)
+    private void SpawnCrowOneLane(float offsetDistance, int lane)
 {
     if (lane < 0 || lane >= spawnLanes.Length)
     {
