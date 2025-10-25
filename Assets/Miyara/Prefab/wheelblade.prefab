@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 2
+  enableRotation: 1
+  rotationSpeed: 90
 --- !u!54 &-2832966889076806653
 Rigidbody:
   m_ObjectHideFlags: 0

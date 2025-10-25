@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class WindParticle : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class WindParticle : MonoBehaviour
     {
         moveDirection = direction;
         lifetime = life;
-        Destroy(gameObject, lifetime); // õ–½‚Å©“®íœ
+        Destroy(gameObject, lifetime); // å¯¿å‘½ã§è‡ªå‹•å‰Šé™¤
     }
 
     void Update()

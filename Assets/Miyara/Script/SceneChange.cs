@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
     /// <summary>
-    /// ƒV[ƒ“–¼‚Å•ÏX
+    /// ã‚·ãƒ¼ãƒ³åã§å¤‰æ›´
     /// </summary>
     public void ChangeSceneByName(string sceneName)
     {

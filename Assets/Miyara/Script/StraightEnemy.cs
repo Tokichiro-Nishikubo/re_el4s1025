@@ -1,24 +1,33 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class StraightEnemy : MonoBehaviour
 {
-    [Header("ˆÚ“®")]
-    [SerializeField] private Vector3 moveDirection = Vector3.forward;    // ˆÚ“®•ûŒü
-    [SerializeField] public float moveSpeed = 2.0f;                     // ˆÚ“®‘¬“x
+    [Header("ç§»å‹•")]
+    [SerializeField] private Vector3 moveDirection = Vector3.forward; // ç§»å‹•æ–¹å‘
+    [SerializeField] public float moveSpeed = 2.0f;                   // ç§»å‹•é€Ÿåº¦
+
+    [Header("å›è»¢")]
+    [SerializeField] private bool enableRotation = false;            // å›è»¢ã™ã‚‹ã‹ã©ã†ã‹
+    [SerializeField] private float rotationSpeed = 90f;              // å›è»¢é€Ÿåº¦ï¼ˆåº¦/ç§’ï¼‰
 
     void Update()
     {
+        // ç§»å‹•å‡¦ç†
         transform.position += moveDirection.normalized * moveSpeed * Time.deltaTime;
-    }
 
+        // å›è»¢å‡¦ç†ï¼ˆæœ‰åŠ¹ãªå ´åˆã®ã¿ï¼‰
+        if (enableRotation)
+        {
+            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("ƒvƒŒƒCƒ„[‚ÉÚGI");
-            // ‚±‚±‚Éƒ_ƒ[ƒWˆ—‚âƒCƒxƒ“ƒg‚ğ’Ç‰Á
+            Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«æ¥è§¦ï¼");
+            // ã“ã“ã«ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†ã‚„ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ 
         }
     }
-
 }

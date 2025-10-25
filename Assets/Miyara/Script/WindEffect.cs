@@ -1,30 +1,30 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class WindEffect : MonoBehaviour
 {
-    [Header("•—‚Ìİ’è")]
+    [Header("é¢¨ã®è¨­å®š")]
     [SerializeField] private Vector3 windCenterPosition = Vector3.zero;
-    [SerializeField] private Vector3 windDirection = Vector3.right;           // •—‚Ì•ûŒü
-    [SerializeField] private float windStrength = 1.0f;                       // oŒ»•p“x‚É‰e‹¿ (0.0`1.0)
-    [SerializeField] private float windDuration = 5.0f;                       // •—‚ª‚­ŠÔ
+    [SerializeField] private Vector3 windDirection = Vector3.right;           // é¢¨ã®æ–¹å‘
+    [SerializeField] private float windStrength = 1.0f;                       // å‡ºç¾é »åº¦ã«å½±éŸ¿ (0.0ï½1.0)
+    [SerializeField] private float windDuration = 5.0f;                       // é¢¨ãŒå¹ãæ™‚é–“
     [SerializeField] private float spawnRadius = 2.0f;
 
-    [Header("•——±qƒvƒŒƒnƒu")]
+    [Header("é¢¨ç²’å­ãƒ—ãƒ¬ãƒãƒ–")]
     [SerializeField] private GameObject windParticlePrefab;
 
 
-    private Coroutine windCoroutine; // ƒRƒ‹[ƒ`ƒ“‚ÌQÆ‚ğ•Û
+    private Coroutine windCoroutine; // ã‚³ãƒ«ãƒ¼ãƒãƒ³ã®å‚ç…§ã‚’ä¿æŒ
 
 
     /// <summary>
-    /// •—ƒGƒtƒFƒNƒg‚Ìƒpƒ‰ƒ[ƒ^ƒZƒbƒg
+    /// é¢¨ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆ
     /// </summary>
-    /// <param name="position"> ’†SˆÊ’u </param>
-    /// <param name="direction"> •—‚Ì•ûŒü </param>
-    /// <param name="strength"> •—ƒGƒtƒFƒNƒg‚Ì•p“x </param>
-    /// <param name="duration"> •—‚ª‚­ŠÔ </param>
-    /// <param name="radius"> ƒ‰ƒ“ƒ_ƒ€oŒ»ˆÊ’u”ÍˆÍ </param>
+    /// <param name="position"> ä¸­å¿ƒä½ç½® </param>
+    /// <param name="direction"> é¢¨ã®æ–¹å‘ </param>
+    /// <param name="strength"> é¢¨ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é »åº¦ </param>
+    /// <param name="duration"> é¢¨ãŒå¹ãæ™‚é–“ </param>
+    /// <param name="radius"> ãƒ©ãƒ³ãƒ€ãƒ å‡ºç¾ä½ç½®ç¯„å›² </param>
     public void SetWindParameters(Vector3 position, Vector3 direction, float strength, float duration, float radius)
     {
         windCenterPosition = position;
@@ -36,7 +36,7 @@ public class WindEffect : MonoBehaviour
 
 
     /// <summary>
-    /// •—ŠJn
+    /// é¢¨é–‹å§‹
     /// </summary>
     public void StartWind()
     {
@@ -47,7 +47,7 @@ public class WindEffect : MonoBehaviour
     }
 
     /// <summary>
-    /// •—’â~
+    /// é¢¨åœæ­¢
     /// </summary>
     public void StopWind()
     {
@@ -78,11 +78,11 @@ public class WindEffect : MonoBehaviour
 
         GameObject particle = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity);
 
-        // WindParticle ƒXƒNƒŠƒvƒg‚É•ûŒü‚Æõ–½‚ğ“n‚·
+        // WindParticle ã‚¹ã‚¯ãƒªãƒ—ãƒˆã«æ–¹å‘ã¨å¯¿å‘½ã‚’æ¸¡ã™
         WindParticle wp = particle.GetComponent<WindParticle>();
         if (wp != null)
         {
-            wp.Initialize(windDirection.normalized, 3.0f); // õ–½3•b‚È‚Ç
+            wp.Initialize(windDirection.normalized, 3.0f); // å¯¿å‘½3ç§’ãªã©
         }
     }
 

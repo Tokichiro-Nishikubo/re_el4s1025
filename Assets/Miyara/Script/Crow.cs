@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Crow : MonoBehaviour
 {
@@ -6,34 +6,34 @@ public class Crow : MonoBehaviour
     public struct LaneSpawnSetting
     {
         public int laneIndex;
-        public bool mode; // true ¨ ‘¼ƒŒ[ƒ“‚É2‘ÌƒXƒ|[ƒ“Afalse ¨ w’èƒŒ[ƒ“‚É1‘Ì
+        public bool mode; // true â†’ ä»–ãƒ¬ãƒ¼ãƒ³ã«2ä½“ã‚¹ãƒãƒ¼ãƒ³ã€false â†’ æŒ‡å®šãƒ¬ãƒ¼ãƒ³ã«1ä½“
     }
 
 
-    [Header("ˆÚ“®İ’è")]
+    [Header("ç§»å‹•è¨­å®š")]
     [SerializeField] public Vector3 moveDirection = Vector3.forward;
     [SerializeField] public float moveSpeed = 2.0f;
 
-    [Header("ƒŒ[ƒ“İ’è")]
+    [Header("ãƒ¬ãƒ¼ãƒ³è¨­å®š")]
     [SerializeField] public Transform[] spawnLanes;
     [SerializeField] public LaneSpawnSetting[] laneSettings;
 
-    [Header("ƒGƒlƒ~[İ’è")]
+    [Header("ã‚¨ãƒãƒŸãƒ¼è¨­å®š")]
     [SerializeField] private GameObject enemyPrefab;
 
 
-    private int spawnCount = 0; // SpawnŠÖ”‚ÌŒÄ‚Ño‚µ‰ñ”
+    private int spawnCount = 0; // Spawné–¢æ•°ã®å‘¼ã³å‡ºã—å›æ•°
 
 
 
     /// <summary>
-    /// ƒJƒ‰ƒX‚ÌƒXƒ|[ƒ“
+    /// ã‚«ãƒ©ã‚¹ã®ã‚¹ãƒãƒ¼ãƒ³
     /// </summary>
     public void SpawnCrow(float offsetDistance)
     {
         if (laneSettings.Length == 0 || spawnLanes.Length == 0)
         {
-            Debug.LogWarning("laneSettings ‚Ü‚½‚Í spawnLanes ‚ª–¢İ’è‚Å‚·");
+            Debug.LogWarning("laneSettings ã¾ãŸã¯ spawnLanes ãŒæœªè¨­å®šã§ã™");
             return;
         }
 
@@ -53,13 +53,13 @@ public class Crow : MonoBehaviour
     }
 
     /// <summary>
-    /// w’èƒŒ[ƒ“‚É“G‚ğƒXƒ|[ƒ“
+    /// æŒ‡å®šãƒ¬ãƒ¼ãƒ³ã«æ•µã‚’ã‚¹ãƒãƒ¼ãƒ³
     /// </summary>
     private void SpawnCrowOneLane(float offsetDistance, int lane)
     {
         if (lane < 0 || lane >= spawnLanes.Length)
         {
-            Debug.LogWarning($"laneIndex ‚Ì’l {lane} ‚ª spawnLanes ‚Ì”ÍˆÍŠO‚Å‚·");
+            Debug.LogWarning($"laneIndex ã®å€¤ {lane} ãŒ spawnLanes ã®ç¯„å›²å¤–ã§ã™");
             return;
         }
 
@@ -71,13 +71,13 @@ public class Crow : MonoBehaviour
     }
 
     /// <summary>
-    /// w’èƒŒ[ƒ“ˆÈŠO‚Ì2ƒŒ[ƒ“‚É“G‚ğƒXƒ|[ƒ“
+    /// æŒ‡å®šãƒ¬ãƒ¼ãƒ³ä»¥å¤–ã®2ãƒ¬ãƒ¼ãƒ³ã«æ•µã‚’ã‚¹ãƒãƒ¼ãƒ³
     /// </summary>
     private void SpawnCrowOtherLanes(float offsetDistance, int excludedLane)
     {
         if (spawnLanes.Length < 3)
         {
-            Debug.LogWarning("spawnLanes ‚ª3‚Â–¢–‚Å‚·");
+            Debug.LogWarning("spawnLanes ãŒ3ã¤æœªæº€ã§ã™");
             return;
         }
 
