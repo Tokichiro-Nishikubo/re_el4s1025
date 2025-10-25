@@ -22,6 +22,10 @@ public class Crow : MonoBehaviour
     [Header("エネミー設定")]
     [SerializeField] private GameObject enemyPrefab;
 
+    [Header("プレイヤーとの距離判定")]
+    [SerializeField] PlayerController player;
+    [SerializeField] float range = 5.0f;
+
 
     private int spawnCount = 0; // Spawn関数の呼び出し回数
 
@@ -40,6 +44,14 @@ public class Crow : MonoBehaviour
 
         int index = spawnCount % laneSettings.Length;
         LaneSpawnSetting setting = laneSettings[index];
+
+
+        // プレイヤーとの距離判定によるスポーン停止
+        float distance = Vector3.Distance(player.transform.position, spawnLanes[index].position);
+        if (distance < range)
+            return;
+
+
 
         if (setting.mode)
         {
