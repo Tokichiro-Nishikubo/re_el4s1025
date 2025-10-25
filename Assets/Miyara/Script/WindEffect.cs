@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WindEffect : MonoBehaviour
 {
@@ -13,9 +15,22 @@ public class WindEffect : MonoBehaviour
     [Header("風粒子プレハブ")]
     [SerializeField] private GameObject windParticlePrefab;
 
+    // 内部的に保持
+    private Coroutine windCoroutine;
+    private Vector3 _windCenterPosition;
+    private Vector3 _windDirection;          
+    private float _windStrength ;         
+    private float _windDuration;             
+    private float _spawnRadius;
 
-    private Coroutine windCoroutine; // コルーチンの参照を保持
-
+    private void Start()
+    {
+        _windCenterPosition = windCenterPosition;
+        _windDirection = windDirection;
+        _windStrength = windStrength;
+        _windDuration = windDuration;
+        _spawnRadius = spawnRadius;
+    }
 
     /// <summary>
     /// 風エフェクトのパラメータセット
@@ -27,11 +42,19 @@ public class WindEffect : MonoBehaviour
     /// <param name="radius"> ランダム出現位置範囲 </param>
     public void SetWindParameters(Vector3 position, Vector3 direction, float strength, float duration, float radius)
     {
-        windCenterPosition = position;
-        windDirection = direction.normalized;
-        windStrength = strength;
-        windDuration = duration;
-        spawnRadius = radius;
+        _windCenterPosition = position;
+        _windDirection = direction.normalized;
+        _windStrength = strength;
+        _windDuration = duration;
+        _spawnRadius = radius;
+
+
+        windCenterPosition = _windCenterPosition;
+        windDirection = _windDirection;
+        windStrength = _windStrength;
+        windDuration = _windDuration;
+        spawnRadius = _spawnRadius;
+
     }
 
 
@@ -40,10 +63,20 @@ public class WindEffect : MonoBehaviour
     /// </summary>
     public void StartWind()
     {
-        if (windCoroutine == null)
+        if (windCoroutine != null)
         {
-            windCoroutine = StartCoroutine(EmitWindParticles());
+            StopCoroutine(windCoroutine);
         }
+        
+        
+        windCenterPosition = _windCenterPosition;
+        windDirection = _windDirection;
+        windStrength = _windStrength;
+        windDuration = _windDuration;
+        spawnRadius = _spawnRadius;
+
+        windCoroutine = StartCoroutine(EmitWindParticles());
+        
     }
 
     /// <summary>
@@ -73,7 +106,7 @@ public class WindEffect : MonoBehaviour
 
     private void SpawnWindParticle()
     {
-        Vector3 randomOffset = Random.insideUnitSphere * spawnRadius;
+        Vector3 randomOffset = UnityEngine.Random.insideUnitSphere * spawnRadius;
         Vector3 spawnPosition = windCenterPosition + randomOffset;
 
         GameObject particle = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity);
