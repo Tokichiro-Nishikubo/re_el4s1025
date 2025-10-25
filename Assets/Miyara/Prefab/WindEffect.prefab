@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windCenterPosition: {x: 0, y: 0, z: 0}
   windDirection: {x: 1, y: 0, z: 0}
-  windStrength: 30
+  windStrength: 0.1
   windDuration: 20
   spawnRadius: 5
   windParticlePrefab: {fileID: 2785605183298381457, guid: e91781bf35bfdbd44bec0b4d3e20845e, type: 3}

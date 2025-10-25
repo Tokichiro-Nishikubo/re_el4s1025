@@ -6,7 +6,7 @@ public class WindEffect : MonoBehaviour
     [Header("•—‚Ìİ’è")]
     [SerializeField] private Vector3 windCenterPosition = Vector3.zero;
     [SerializeField] private Vector3 windDirection = Vector3.right;           // •—‚Ì•ûŒü
-    [SerializeField] private float windStrength = 1.0f;                       // oŒ»•p“x‚É‰e‹¿
+    [SerializeField] private float windStrength = 1.0f;                       // oŒ»•p“x‚É‰e‹¿ (0.0`1.0)
     [SerializeField] private float windDuration = 5.0f;                       // •—‚ª‚­ŠÔ
     [SerializeField] private float spawnRadius = 2.0f;
 
