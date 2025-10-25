@@ -12,6 +12,8 @@ public class StraightEnemy : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.IsGame) return;
+
         // 移動処理
         transform.position += moveDirection.normalized * moveSpeed * Time.deltaTime;
 
