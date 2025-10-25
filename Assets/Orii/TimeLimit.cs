@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class TimeLimit : MonoBehaviour
 {
-    //‰Šúİ’èŠÔ
+    //åˆæœŸè¨­å®šæ™‚é–“
     [SerializeField] float firstTime = 120;
-    //Œo‰ßŠÔ
+    //çµŒéæ™‚é–“
     float elapsedTime = 0;
     float nowTime = 0;
     Text timeText;
@@ -19,24 +19,24 @@ public class TimeLimit : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //‰½•bŒo‰ß‚µ‚½‚©
+        //ä½•ç§’çµŒéã—ãŸã‹
         elapsedTime += Time.deltaTime;
-        //Œo‰ß‚µ‚½ŠÔ‚ğ‰Šúİ’èŠÔ‚©‚çˆø‚­
+        //çµŒéã—ãŸæ™‚é–“ã‚’åˆæœŸè¨­å®šæ™‚é–“ã‹ã‚‰å¼•ã
         nowTime = firstTime - elapsedTime;
 
-        //ƒ}ƒCƒiƒX•b‚É‚È‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+        //ãƒã‚¤ãƒŠã‚¹ç§’ã«ãªã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
         if (nowTime < 0)
         {
             nowTime = 0;
         }
 
-        //ƒeƒLƒXƒg‚Ìo—Í•”•ª
+        //ãƒ†ã‚­ã‚¹ãƒˆã®å‡ºåŠ›éƒ¨åˆ†
         {
-            //•ª
+            //åˆ†
             int minutes = Mathf.FloorToInt(nowTime / 60f);
-            //•b
+            //ç§’
             int seconds = Mathf.FloorToInt(nowTime % 60f);
-            //ƒ~ƒŠ•b
+            //ãƒŸãƒªç§’
             int milliseconds = Mathf.FloorToInt((nowTime % 1f) * 100f);
 
             timeText.text = string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, milliseconds);
@@ -44,7 +44,7 @@ public class TimeLimit : MonoBehaviour
     }
 
 
-    //ŒÄ‚Ño‚µ‚½uŠÔ‚ÉŒo‰ßŠÔ‚ªÅ‰‚©‚ç‚É‚È‚é
+    //å‘¼ã³å‡ºã—ãŸç¬é–“ã«çµŒéæ™‚é–“ãŒæœ€åˆã‹ã‚‰ã«ãªã‚‹
     void TimeRestart()
     {
         elapsedTime = 0;
