@@ -3,16 +3,7 @@ using UnityEngine;
 
 public class TitleManager : MonoBehaviour
 {
-    private ITitleObject[] titleObjects;
-
-    [System.Obsolete]
-    private void Awake()
-    {
-        // ƒV[ƒ“ã‚É‚ ‚é ITitleObject ‚ğ‚·‚×‚Äæ“¾
-        titleObjects = FindObjectsOfType<MonoBehaviour>(true)
-            .OfType<ITitleObject>()
-            .ToArray();
-    }
+    [SerializeField] private MonoBehaviour[] titleObjects;
 
     private void Start()
     {
@@ -30,7 +21,8 @@ public class TitleManager : MonoBehaviour
     {
         foreach (var obj in titleObjects)
         {
-            obj.TitleSet();
+            
+            obj.GetComponent<ITitleObject>().TitleSet();
         }
     }
 
@@ -38,7 +30,7 @@ public class TitleManager : MonoBehaviour
     {
         foreach (var obj in titleObjects)
         {
-            obj.GameStart();
+            obj.GetComponent<ITitleObject>().GameStart();
         }
     }
 }

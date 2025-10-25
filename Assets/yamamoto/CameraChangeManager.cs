@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class CameraChangeManager : MonoBehaviour,ITitleObject
 {
-    // Unityエディタから設定できるようにPublicで宣言
-    public CinemachineCamera TitleCamera;
-    public CinemachineCamera GameCamera;
+    [SerializeField]private CinemachineCamera TitleCamera;
+    [SerializeField] private CinemachineCamera GameCamera;
 
     private int activePriority = 10;
     private int inactivePriority = 5;
